@@ -52,3 +52,9 @@ The main dataset lists peptide sequences and their corresponding secondary struc
 | **_{MODEL}_ Layers**   | Two _{MODEL}_ layers, each with 128 units, process sequence data and capture dependencies. Both layers return sequences, enabling per-residue secondary structure predictions. | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, 128)`    |
 | **Dropout Layers**     | Dropout of 0.2 after each LSTM layer to reduce overfitting.                                                                                                                    | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, 128)`    |
 | **Dense Output Layer** | A softmax layer outputs probabilities across `n_ssts` classes (three-state or eight-state classification).                                                                     | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, n_ssts)` |
+
+## Acknowledgments
+
+- **Alfrandom**: For providing the dataset through [Alfrandom - Protein Secondary Structure](https://www.kaggle.com/datasets/alfrandom/protein-secondary-structure).
+
+Thank you!
