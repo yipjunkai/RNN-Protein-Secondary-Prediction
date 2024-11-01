@@ -1,6 +1,8 @@
 # Protein Secondary Structure Prediction using Neural Networks
 
-Protein secondary structure prediction is a vital task in computational biology, as the structural configuration of proteins directly impacts their function.
+This project aims to leverage neural networks to accurately predict protein secondary structures while evaluating the performance of various RNN models for optimal results.
+
+This project was written by [Florian](https://www.linkedin.com/in/XX/), [Jun Kai](https://www.linkedin.com/in/yipjk/) and [Min Jie](https://www.linkedin.com/in/XX/).
 
 The dataset for this project is sourced from [Alfrandom - Protein Secondary Structure (Kaggle)](https://www.kaggle.com/datasets/alfrandom/protein-secondary-structure).
 
