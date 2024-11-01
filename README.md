@@ -13,6 +13,8 @@ Protein secondary structure prediction is a vital task in computational biology,
 
 ![Accuracy comparison](./POST/accuracy.png)
 
+Comparison done in [Google Colab](https://colab.research.google.com/drive/1VjYO96ouZbZEeGzineEPOOiUi_iTAcr1?usp=sharing).
+
 **Note**: All models were run using the same hyperparameters and on the same hardware (L4 in Colab).
 
 ## Project overview
