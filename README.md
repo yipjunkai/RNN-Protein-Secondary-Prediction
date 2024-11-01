@@ -2,6 +2,8 @@
 
 Protein secondary structure prediction is a vital task in computational biology, as the structural configuration of proteins directly impacts their function.
 
+The dataset for this project is sourced from [Alfrandom - Protein Secondary Structure (Kaggle)](https://www.kaggle.com/datasets/alfrandom/protein-secondary-structure).
+
 ## Previous runs
 
 | Model   | Accuracy | Description                                                                                                                                                                    | Link                                                                                                   |
@@ -19,7 +21,7 @@ Comparison done in [Google Colab](https://colab.research.google.com/drive/1VjYO9
 
 ## Project overview
 
-### Dataset explaination
+### Dataset
 
 The main dataset lists peptide sequences and their corresponding secondary structures. It is a transformation of [rcsb](https://cdn.rcsb.org/etl/kabschSander/ss.txt.gz) downloaded at 2018-06-06 from RSCB PDB into a tabular structure. If you download the file at a later time, the number of sequences in it will probably increase.
 
@@ -33,13 +35,14 @@ The main dataset lists peptide sequences and their corresponding secondary struc
 | **len**           | Length of the peptide sequence.                                                         |
 | **has_nonstd_aa** | Indicates whether the peptide contains nonstandard amino acids (B, O, U, X, or Z).      |
 
-## Models explainations
+## Models
 
 ### Preprocessing
 
-1. **Kmers:** The amino acid sequences (seq) are split into k-mers of length 3 using the seq2kmers function. This divides each sequence into overlapping substrings, helping the model capture local sequence patterns.
-2. **Input Tokenization:** The k-mers are then tokenized for embedding.
-3. **Target tokenization:** The target secondary structure labels are one-hot encoded to prepare them for classification.
+1. **Sub Selection:** Sequences with standard AA and of (100 < length < 300 ) are selected.
+2. **Kmers:** The amino acid sequences (seq) are split into k-mers of length 3 using the seq2kmers function. This divides each sequence into overlapping substrings, helping the model capture local sequence patterns.
+3. **Input Tokenization:** The k-mers are then tokenized for embedding.
+4. **Target tokenization:** The target secondary structure labels are one-hot encoded to prepare them for classification.
 
 ### Model structure
 
