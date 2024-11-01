@@ -4,8 +4,16 @@ Protein secondary structure prediction is a vital task in computational biology,
 
 ## Previous runs
 
-- [Tensorflow LSTM](https://colab.research.google.com/drive/1bhPuqLQtwF6GSRCO1RnPC3pL1JFizU9S?usp=sharing)
-- ...
+| Model   | Accuracy | Description                                                                                                                                                                    | Link                                                                                                   |
+| ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| GRU     | 89%      | Selected for its efficiency and ability to capture dependencies in sequential data. Faster to train than LSTMs while still providing strong performance.                       | [View Notebook](https://colab.research.google.com/drive/1bu4d0PFq-xVHjNbFBdoKCjQPnkuCraOO?usp=sharing) |
+| LSTM    | 89%      | Effective in handling long-range dependencies and mitigating the vanishing gradient problem. Suited for complex sequence prediction tasks.                                     | [View Notebook](https://colab.research.google.com/drive/1bhPuqLQtwF6GSRCO1RnPC3pL1JFizU9S?usp=sharing) |
+| BI-GRU  | 91%      | Improves context capture by considering sequences in both forward and backward directions. Enhances performance in tasks like text classification.                             | [View Notebook](https://colab.research.google.com/drive/1Qfu4eseFzlBexhAWWMl0Nrzmf4LUNPaA?usp=sharing) |
+| BI-LSTM | 91%      | Processes data in both directions, leveraging information from past and future states. Ideal for nuanced understanding in tasks like language modeling and sentiment analysis. | [View Notebook](https://colab.research.google.com/drive/1g5FtOeL34uxMCgcDiee0Hs8rQhtCsRso?usp=sharing) |
+
+![Accuracy comparison](./POST/accuracy.png)
+
+**Note**: All models were run using the same hyperparameters and on the same hardware (L4 in Colab).
 
 ## Project overview
 
@@ -23,9 +31,7 @@ The main dataset lists peptide sequences and their corresponding secondary struc
 | **len**           | Length of the peptide sequence.                                                         |
 | **has_nonstd_aa** | Indicates whether the peptide contains nonstandard amino acids (B, O, U, X, or Z).      |
 
-## LSTM
-
-LSTM attempt found at [/LSTM](/LSTM/LSTM_tf.ipynb)
+## Models explainations
 
 ### Preprocessing
 
@@ -35,9 +41,9 @@ LSTM attempt found at [/LSTM](/LSTM/LSTM_tf.ipynb)
 
 ### Model structure
 
-| **Component**          | **Description**                                                                                                                                                           | **Input Dimensions**        | **Output Dimensions**          |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------------ |
-| **Embedding Layer**    | Maps each tokenized k-mer to a 128-dimensional vector. `n_words` is the vocabulary size from tokenization.                                                                | `(MAX_AMINO_ACID_LEN,)`     | `(MAX_AMINO_ACID_LEN, 128)`    |
-| **LSTM Layers**        | Two LSTM layers, each with 128 units, process sequence data and capture dependencies. Both layers return sequences, enabling per-residue secondary structure predictions. | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, 128)`    |
-| **Dropout Layers**     | Dropout of 0.2 after each LSTM layer to reduce overfitting.                                                                                                               | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, 128)`    |
-| **Dense Output Layer** | A softmax layer outputs probabilities across `n_ssts` classes (three-state or eight-state classification).                                                                | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, n_ssts)` |
+| **Component**          | **Description**                                                                                                                                                                | **Input Dimensions**        | **Output Dimensions**          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- | ------------------------------ |
+| **Embedding Layer**    | Maps each tokenized k-mer to a 128-dimensional vector. `n_words` is the vocabulary size from tokenization.                                                                     | `(MAX_AMINO_ACID_LEN,)`     | `(MAX_AMINO_ACID_LEN, 128)`    |
+| **_{MODEL}_ Layers**   | Two _{MODEL}_ layers, each with 128 units, process sequence data and capture dependencies. Both layers return sequences, enabling per-residue secondary structure predictions. | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, 128)`    |
+| **Dropout Layers**     | Dropout of 0.2 after each LSTM layer to reduce overfitting.                                                                                                                    | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, 128)`    |
+| **Dense Output Layer** | A softmax layer outputs probabilities across `n_ssts` classes (three-state or eight-state classification).                                                                     | `(MAX_AMINO_ACID_LEN, 128)` | `(MAX_AMINO_ACID_LEN, n_ssts)` |
